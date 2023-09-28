@@ -1,0 +1,19 @@
+{
+  "discriminator": "type",
+  "mapping": {
+    "AuthorizationRequest": {
+      "properties": {
+        "payload": {
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

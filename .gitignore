@@ -1,0 +1,19 @@
+# misc
+.DS_Store
+.idea
+/temp
+tsconfig.tsbuildinfo
+
+# dev and build
+/build
+
+# dependencies
+node_modules
+
+# environment specifit
+.env
+.env.*
+!.env.example
+/pm2.config.cjs
+
+
