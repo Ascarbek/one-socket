@@ -1,51 +1,69 @@
 import { z, ZodDiscriminatedUnionOption, ZodObject } from 'zod';
-import { socketWrapper } from './Server/socketWrapper.js';
+import { processMessage, socketWrapper as serverSocketWrapper } from './Server/socketWrapper.js';
+import { socketWrapper as clientSocketWrapper } from './Client/socketWrapper.js';
 
-export interface IProtocol {
-  [keys: string]: {
-    request: ZodObject<any>;
-    response: ZodObject<any>;
-  };
-}
-
-(async () => {
-  const list: IProtocol = {
-    Authorization: {
-      request: z.object({
+const list = {
+  Authorization: {
+    request: z
+      .object({
         username: z.string(),
         password: z.string(),
-      }),
-      response: z.object({
+      })
+      .strict(),
+    response: z
+      .object({
         access: z.string(),
-      }),
-    },
+      })
+      .strict(),
+  },
 
-    ValidateToken: {
-      request: z.object({
+  ValidateToken: {
+    request: z
+      .object({
         access: z.string(),
-      }),
-      response: z.object({
+      })
+      .strict(),
+    response: z
+      .object({
         access: z.string(),
         refresh: z.string(),
-      }),
-    },
-  };
+      })
+      .strict(),
+  },
+};
 
-  try{
-    JSON.parse('{"username":"admin","password":"12');
-  }
-  catch (e) {
-    // console.log('error: ', e);
-  }
+const AuthorizationRequest = async (params: z.infer<typeof list.Authorization.request>) => {
+  console.log('AuthorizationRequest', params);
+  return '123';
+};
 
-  socketWrapper(list,{})
+const ValidateTokenRequest = async (params: any) => {};
 
-  const parseResult = list['Authorization'].request.strict().safeParse({ username: 'admin', password: '123', another:'2' });
+const AuthorizationResponse = async (params: any) => {
+  console.log('AuthorizationResponse', params);
+};
+
+const ValidateTokenResponse = async (params: any) => {};
+
+(async () => {
+  serverSocketWrapper(list, {
+    Authorization: AuthorizationRequest,
+    ValidateToken: ValidateTokenRequest,
+  });
+
+  await processMessage('{"type":"Authorization","payload":{"username":"admin","password":"123"}}');
+
+  clientSocketWrapper(list, {
+    Authorization: AuthorizationResponse,
+    ValidateToken: ValidateTokenResponse,
+  });
+
+  /*const parseResult = list['Authorization'].request.strict().safeParse({ username: 'admin', password: '123', another:'2' });
   if (parseResult.success) {
     console.log('parse result success: ');
   } else {
     console.log('parse result error: ', parseResult.error.errors[0].message);
-  }
+  }*/
 
   /*const protocol = z.discriminatedUnion('type', [
     z.object({
