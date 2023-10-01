@@ -8,6 +8,8 @@ export const ProtocolSchema = z.record(
   })
 );
 
+export type IProtocol = z.infer<typeof ProtocolSchema>;
+
 export interface IHandlers {
   [keys: string]: (params: any) => Promise<any>;
 }

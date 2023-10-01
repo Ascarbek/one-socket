@@ -1,10 +1,4 @@
-const oneSocket = {
-  oneSocketServer: (host: string, port: number) => {
-    // listener(host, port);
-  },
-  oneSocketClient: (host: string, port: number) => {
-    console.log('client');
-  },
-};
-
-export default oneSocket;
+export * from './types.js';
+export { server } from './server.js';
+export { client } from './client.js';
+export { sendRequest } from './Client/sendRequest.js';
