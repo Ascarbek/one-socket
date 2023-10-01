@@ -1,10 +1,6 @@
 import * as net from 'node:net';
-import { getHost, getPort } from '../client.js';
 
-export const sendRequest: (params: string) => Promise<string> = (params: string) => {
-  const host = getHost();
-  const port = getPort();
-
+export const sendRequest: (host: string, port: number, params: string) => Promise<string> = (host, port, params) => {
   return new Promise((resolve, reject) => {
     const client = net.createConnection({ host, port }, async () => {
       client.write(params + '\n');

@@ -5,31 +5,23 @@ import { sendRequest } from './Client/sendRequest.js';
 
 const list = {
   Authorization: {
-    request: z
-      .object({
-        username: z.string(),
-        password: z.string(),
-      })
-      .strict(),
-    response: z
-      .object({
-        access: z.string(),
-      })
-      .strict(),
+    request: z.object({
+      username: z.string(),
+      password: z.string(),
+    }),
+    response: z.object({
+      access: z.string(),
+    }),
   },
 
   ValidateToken: {
-    request: z
-      .object({
-        access: z.string(),
-      })
-      .strict(),
-    response: z
-      .object({
-        access: z.string(),
-        refresh: z.string(),
-      })
-      .strict(),
+    request: z.object({
+      access: z.string(),
+    }),
+    response: z.object({
+      access: z.string(),
+      refresh: z.string(),
+    }),
   },
 };
 
@@ -40,12 +32,17 @@ const AuthorizationRequest = async (params: z.infer<typeof list.Authorization.re
 
 const ValidateTokenRequest = async (params: any) => {};
 
+const AuthorizationResponse = z.discriminatedUnion('success', [
+  z.object({ success: z.literal(true), payload: list.Authorization.response }),
+  z.object({ success: z.literal(false), errorMsg: z.string() }),
+]);
+
 const AuthorizationSend: (
   params: z.infer<typeof list.Authorization.request>
-) => Promise<z.infer<typeof list.Authorization.response>> = async (params) => {
-  const resp = await sendRequest(JSON.stringify({ type: 'Authorization', payload: params }));
+) => Promise<z.infer<typeof AuthorizationResponse>> = async (params) => {
+  const resp = await sendRequest('127.0.0.1', 8123, JSON.stringify({ type: 'Authorization', payload: params }));
 
-  return JSON.parse(resp) as z.infer<typeof list.Authorization.response>;
+  return JSON.parse(resp) as z.infer<typeof AuthorizationResponse>;
 };
 
 const ValidateTokenResponse = async (params: any) => {};
@@ -55,8 +52,6 @@ const ValidateTokenResponse = async (params: any) => {};
     Authorization: AuthorizationRequest,
     ValidateToken: ValidateTokenRequest,
   });
-
-  client('127.0.0.1', 8123, list);
 
   const resp = await AuthorizationSend({ username: 'admin', password: '123' });
   console.log('response: ', resp);

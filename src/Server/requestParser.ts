@@ -20,6 +20,8 @@ export const processMessage = async (msg: string) => {
 
   const type = raw.type;
 
+  console.log('incoming request: ', type);
+
   if (!type) {
     return error('Request type not found');
   }
@@ -30,7 +32,7 @@ export const processMessage = async (msg: string) => {
     return error('Handler not found');
   }
 
-  const requestSchema = protocol[type].request;
+  const requestSchema = protocol[type].request.strict();
   const requestParseResult = requestSchema.safeParse(raw.payload);
 
   if (!requestParseResult.success) {
@@ -39,7 +41,7 @@ export const processMessage = async (msg: string) => {
 
   try {
     const response = await handlers[type](raw.payload);
-    const responseSchema = protocol[type].response;
+    const responseSchema = protocol[type].response.strict();
     const responseParseResult = responseSchema.safeParse(response);
     if (!responseParseResult.success) {
       return error(responseParseResult.error.errors[0].message);
