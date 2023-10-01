@@ -1,4 +1,4 @@
-import { z, AnyZodObject, ZodAny } from 'zod';
+import { z } from 'zod';
 
 export const ProtocolSchema = z.record(
   z.string(),
@@ -13,3 +13,5 @@ export type IProtocol = z.infer<typeof ProtocolSchema>;
 export interface IHandlers {
   [keys: string]: (params: any) => Promise<any>;
 }
+
+export type TResponse<T> = { success: false; errorMsg: string } | { success: true; payload: T };
