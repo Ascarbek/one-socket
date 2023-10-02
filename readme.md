@@ -13,8 +13,8 @@ npm i -D one-socket
 ```
 
 # Usage
-OneSocket is designed to be used in a microservice architecture as RPC or IPC. In comparison to gRPC and protobuf OneSocket uses pure JS and JSON
-which makes it much quicker to start working with. OneSocket is not designed to be used in a browser, because it is not an HTTP server.
+OneSocket is designed to be used in a microservice architecture as RPC or IPC. In comparison to gRPC and protobuf OneSocket uses JavaScript and JSON
+which makes it very easy to start working with. OneSocket is not designed to be used in a browser, because it is not an HTTP server.
 
 # Getting Started
 ## Schema
@@ -70,7 +70,7 @@ const handlers = {
 }
 ```
 ## Server instance
-Both Schema and Handlers should be supplier to the OneSocket server instance
+Both Schema and Handlers should be supplied to the OneSocket server instance
 ```TypeScript
 OneSocketServer('127.0.0.1', 8123, schema, {
   SignUp: SignUp,
@@ -82,7 +82,7 @@ Client instance is a function that takes a host, port and a stringified JSON obj
 ```TypeScript
 OneSocketClient('127.0.0.1', 8123, JSON.stringify({ type: 'SignUp', payload: { username: 'admin', password: '123' } }));
 ```
-Since all request and responses are parsed with Zod on the server side, the client can infer the response type from the schema and return a typed response.
+Since all requests and responses will be parsed using Zod on the Server, the client can safely infer the response type from the schema and return a typed response.
 ```TypeScript
 import { OneSocketClient, type TResponse } from 'one-socket';
 

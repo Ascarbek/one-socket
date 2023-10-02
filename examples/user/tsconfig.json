@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "moduleResolution": "node16",
+    "module": "Node16",
+    "noEmitHelpers": false,
+    "skipLibCheck": true,
+    "lib": ["ES2022"],
+    "strict": true,
+    "noImplicitReturns": true,
+    "baseUrl": ".",
+    "target": "ES2022",
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "outDir": "build",
+    "allowSyntheticDefaultImports": false,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"]
+}

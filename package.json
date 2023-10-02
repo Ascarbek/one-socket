@@ -7,7 +7,6 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "tsc && node build/examples/test.js",
     "build": "tsc"
   },
   "repository": {
