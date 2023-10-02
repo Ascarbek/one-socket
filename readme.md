@@ -95,8 +95,5 @@ const SignUpSend: (params: z.infer<typeof schema.SignUp.request>) => Promise<Sig
 };
 ```
 
-# Example
-
-```TypeScript
-
-```
+## Examples
+you can find examples under /examples folder
