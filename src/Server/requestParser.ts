@@ -1,4 +1,4 @@
-import { getHandlers, getProtocol } from '../server.js';
+import { getHandlers, getProtocol } from '../oneSocketServer.js';
 
 const error = (msg: string) => {
   return {

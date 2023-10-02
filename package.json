@@ -1,20 +1,26 @@
 {
   "name": "one-socket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "tsc && node build/test.js",
+    "run": "tsc && node build/examples/test.js",
     "build": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ascarbek/one-socket.git"
   },
-  "keywords": [],
+  "keywords": [
+    "IPC",
+    "Socket",
+    "OneSocket",
+    "RPC",
+    "NodeJS"
+  ],
   "author": "ascarbek@gmail.com",
   "license": "MIT",
   "bugs": {

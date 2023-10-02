@@ -1,6 +1,6 @@
 import * as net from 'node:net';
 
-export const sendRequest: (host: string, port: number, params: string) => Promise<string> = (host, port, params) => {
+export const OneSocketClient: (host: string, port: number, params: string) => Promise<string> = (host, port, params) => {
   return new Promise((resolve, reject) => {
     const client = net.createConnection({ host, port }, async () => {
       client.write(params + '\n');
