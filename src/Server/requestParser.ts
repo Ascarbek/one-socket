@@ -20,7 +20,7 @@ export const processMessage = async (msg: string) => {
 
   const type = raw.type;
 
-  // console.log('incoming request: ', type);
+  console.log(new Date().toISOString(), ' incoming request: ', type);
 
   if (!type) {
     return error('Request type not found');
@@ -37,6 +37,7 @@ export const processMessage = async (msg: string) => {
 
   if (!requestParseResult.success) {
     const errors = requestParseResult.error.errors;
+    console.log(errors);
     return error(errors[errors.length - 1].message);
   }
 
@@ -46,6 +47,7 @@ export const processMessage = async (msg: string) => {
     const responseParseResult = responseSchema.safeParse(response);
     if (!responseParseResult.success) {
       const errors = responseParseResult.error.errors;
+      console.log(errors);
       return error(errors[errors.length - 1].message);
     }
 
