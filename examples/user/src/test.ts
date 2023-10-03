@@ -61,7 +61,7 @@ const SignInSend: (params: z.infer<typeof schema.SignIn.request>) => Promise<Sig
  * Test
  * */
 (async () => {
-  OneSocketServer(HOST, PORT, schema, handlers);
+  OneSocketServer(PORT, schema, handlers);
 
   // normal request
   const resp1 = await SignInSend({ username: 'admin', password: '123' });
