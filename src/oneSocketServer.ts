@@ -14,7 +14,7 @@ export const getHandlers = () => {
   return _handlers;
 };
 
-export const OneSocketServer = (host: string, port: number, protocol: IProtocol, handlers: IHandlers) => {
+export const OneSocketServer = (port: number, protocol: IProtocol, handlers: IHandlers, host?: string) => {
   const protocolParse = ProtocolSchema.safeParse(protocol);
 
   if (!protocolParse.success) {
@@ -25,5 +25,5 @@ export const OneSocketServer = (host: string, port: number, protocol: IProtocol,
     _handlers = handlers;
   }
 
-  socketWrapper(host, port, processMessage);
+  socketWrapper(port, processMessage, host);
 };

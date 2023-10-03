@@ -72,7 +72,7 @@ const handlers = {
 ## Server instance
 Both Schema and Handlers should be supplied to the OneSocket server instance
 ```TypeScript
-OneSocketServer('127.0.0.1', 8123, schema, {
+OneSocketServer(8123, schema, {
   SignUp: SignUp,
   SignIn: SignIn,
 });

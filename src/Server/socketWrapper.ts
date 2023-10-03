@@ -1,7 +1,7 @@
 import * as net from 'node:net';
 import * as process from 'process';
 
-export const socketWrapper = (host: string, port: number, dataCallback: (msg: string) => Promise<any>) => {
+export const socketWrapper = (port: number, dataCallback: (msg: string) => Promise<any>, host?: string) => {
   const server = net.createServer((socket) => {
     let buffer = '';
     socket.on('data', async (data) => {
