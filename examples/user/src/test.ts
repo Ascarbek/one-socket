@@ -52,7 +52,7 @@ const handlers = {
 type SignInResponse = TResponse<z.infer<typeof schema.SignIn.response>>;
 
 const SignInSend: (params: z.infer<typeof schema.SignIn.request>) => Promise<SignInResponse> = async (params) => {
-  const resp = await OneSocketClient(HOST, PORT, JSON.stringify({ type: 'SignIn', payload: params }));
+  const resp = await OneSocketClient(HOST, PORT, { type: 'SignIn', payload: params });
 
   return JSON.parse(resp) as SignInResponse;
 };
@@ -76,7 +76,7 @@ const SignInSend: (params: z.infer<typeof schema.SignIn.request>) => Promise<Sig
   console.log('response 3: ', resp3);
 
   // invalid request (invalid field from client)
-  const resp = await OneSocketClient(HOST, PORT, JSON.stringify({ type: 'SignIn', payload: { some: 'field' } }));
+  const resp = await OneSocketClient(HOST, PORT, { type: 'SignIn', payload: { some: 'field' } });
   console.log('response 4: ', JSON.parse(resp));
 
   process.exit(0);
