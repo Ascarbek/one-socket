@@ -1,9 +1,22 @@
 import * as net from 'node:net';
+import { z } from 'zod';
 
-export const OneSocketClient: (host: string, port: number, params: string) => Promise<string> = (host, port, params) => {
+const incomingSchema = z.object({
+  type: z.string(),
+  payload: z.any(),
+});
+
+export const OneSocketClient: (host: string, port: number, params: any) => Promise<string> = (host, port, params) => {
   return new Promise((resolve, reject) => {
+    const incomingParseResult = incomingSchema.safeParse(params);
+    if (!incomingParseResult.success) {
+      const errors = incomingParseResult.error.errors;
+      console.log(errors);
+      return reject(errors[errors.length - 1].message);
+    }
+
     const client = net.createConnection({ host, port }, async () => {
-      client.write(params + '\n');
+      client.write(JSON.stringify(params) + '\n');
     });
 
     let buffer = '';
