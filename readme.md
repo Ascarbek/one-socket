@@ -142,3 +142,10 @@ const SignUpSend: (params: z.infer<typeof schema.SignUp.request>) => Promise<Sig
 
 ## Examples
 you can find examples under /examples folder
+
+## Feature Plans
+-  Change message format to have proper signature
+-  Integrate authentication
+-  Handle binary data
+-  Add tests
+-  Add more examples
