@@ -1,7 +1,7 @@
 {
   "name": "one-socket",
   "version": "1.0.7",
-  "description": "",
+  "description": "simple socket server and client for NodeJS",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "type": "module",
