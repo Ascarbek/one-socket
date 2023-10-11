@@ -15,11 +15,12 @@
     "url": "git+https://github.com/Ascarbek/one-socket.git"
   },
   "keywords": [
-    "IPC",
-    "Socket",
+    "Nodejs IPC",
+    "one-socket",
     "OneSocket",
-    "RPC",
-    "NodeJS"
+    "Nodejs RPC",
+    "NodeJS Socket",
+    "NodeJS Net"
   ],
   "author": "ascarbek@gmail.com",
   "license": "MIT",
